@@ -51,5 +51,12 @@ public class GroupOfCards {
     public void setSize(int size) {
         this.size = size;
     }
-
+    
+    public void fillDeck() {
+        
+    }
+    
+    
+    
+    
 }//end class

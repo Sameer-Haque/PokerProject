@@ -11,15 +11,32 @@ package pokerproject;
  *
  * @author dancye
  */
-public abstract class Card {
+public class Card {
     //default modifier for child classes
+    public enum SUIT {
+        HEARTS, DIAMONDS, SPADES, CLUBS
+    }
+    
+    public enum RANK {
+        TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, 
+        JACK, QUEEN, KING, ACE
+    }
 
+    public Card(RANK rank, SUIT suit) {
+        
+    }
+    
+    
     /**
-     * Students should implement this method for their specific children classes
-     *
-     * @return a String representation of a card. Could be an UNO card, a regular playing card etc.
-     */
+	 * Students should implement this method for their specific children classes
+	 * @return a String representation of a card. Could be an UNO card, a regular playing card etc.
+	 */
+   
+    
     @Override
-    public abstract String toString();
+	public String toString(){
+        
+        return null;
+    }
 
 }
