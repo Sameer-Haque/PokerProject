@@ -13,34 +13,20 @@ package pokerproject;
  * @author dancye
  * @author Phuong 
  */
-public class Card {
+public class Card implements Comparable{
+
     //default modifier for child classes
     public enum SUIT {
-        HEARTS("Heart"), DIAMONDS("Diamons"), SPADES("Spades"), CLUBS("Clubs");
-
-        private final String suitText;
-
-        private SUIT(String suitText) {
-            this.suitText = suitText;
-        }
-
-        public String getSuit() {
-            return suitText;
-        }
+        HEARTS, DIAMONDS, SPADES, CLUBS;
     }
 
     public enum RANK {
-        TWO("Two"), THREE("Three"), FOUR("Four"), FIVE("Five"), SIX("Six"), SEVEN("Seven"), EIGHT("Eight"), NINE("Nine"), TEN("Ten"),
-        JACK("Jack"), QUEEN("Queen"), KING("King"), ACE("Ace");
-
-        private final String rankValue;
-
-        private RANK(String rankValue) {
-            this.rankValue = rankValue;
-        }
-
-        public String getRank() {
-            return rankValue;
+        TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6), SEVEN(7), EIGHT(8), NINE(9),
+        TEN(10), JACK(11), QUEEN(12), KING(13), ACE(14);
+        private int value;
+        
+        private RANK(int value) {
+            this.value = value;
         }
     }
 
@@ -58,17 +44,22 @@ public class Card {
      * @return a String representation of a card. Could be an UNO card, a
      * regular playing card etc.
      */
-    public String getSuit() {
-        return suit.getSuit();
+    public SUIT getSuit() {
+        return suit;
     }
     
-    public String getRank() {
-        return rank.getRank();
+    public RANK getRank() {
+        return rank;
     }
     
     @Override
     public String toString() {
-        return rank.getRank() + "of" + suit.getSuit();
+        return getRank() + " of " + getSuit();
+    }
+    
+    public int compareTo(Object o) {
+       Card c = (Card)o;
+       return this.rank.value - c.rank.value;
     }
 
 }

@@ -53,11 +53,13 @@ public class GroupOfCards {
     }
     
     public void fillDeck() {
-        int a = 0;
-        for (int i = 1; i <= 13; i++) {
-            cards.get(a);
-            a++;
-        }
+        Card.RANK ranks[] = Card.RANK.values();
+        Card.SUIT suits[] = Card.SUIT.values();
+        for (Card.SUIT suit : suits) {
+            for (Card.RANK rank : ranks) {
+                cards.add(new Card(rank, suit));
+            }
+        } 
     }
     
     
