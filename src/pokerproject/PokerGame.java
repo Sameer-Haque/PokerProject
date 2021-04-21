@@ -17,7 +17,9 @@ public class PokerGame extends Game {
     }
     
     public void flipBoardCards(int i){
-        
+        for (int a = 0; a <= i; a++){
+            System.out.println(); // print the cards in dealBoardCard method
+        }
     }
     
     
