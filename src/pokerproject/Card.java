@@ -10,6 +10,7 @@ package pokerproject;
  * enough to be instantiated for any Card game. Students wishing to add to the
  * code should remember to add themselves as a modifier.
  *
+ * @author Sameer Haque
  * @author dancye
  * @author Phuong 
  */
