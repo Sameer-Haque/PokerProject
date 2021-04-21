@@ -17,7 +17,6 @@ public abstract class Player {
 	/**
 	 * the unique name for this player
 	 */
-	private double money; //the unique name for this player
     
     /**
      * A constructor that allows you to set the player's unique ID
@@ -52,19 +51,5 @@ public abstract class Player {
      */
     public abstract void play();
 
-	/**
-	 * A constructor that allows you to set the player's unique ID
-	 * @param name the unique ID to assign to this player.
-	 */
-	
-	/**
-	 * A constructor that allows you to set the player's unique ID
-	 * @param name the unique ID to assign to this player.
-	 * @param money
-	 */
-	public Player(String name, double money) {
-		// TODO - implement Player.Player
-		throw new UnsupportedOperationException();
-	}
 
 }

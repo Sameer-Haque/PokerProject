@@ -8,8 +8,7 @@ public class PokerPlayer extends Player {
     
     
     public PokerPlayer(String name, double money, Hand hand) {
-        super(name, money);
-        this.name = name;
+        super(name);
         this.money = money;
         this.hand = hand;
     }
@@ -20,6 +19,14 @@ public class PokerPlayer extends Player {
 
     public void setMoney(double money) {
         this.money = money;
+    }
+
+    public Hand getHand() {
+        return hand;
+    }
+
+    public void setHand(Hand hand) {
+        this.hand = hand;
     }
     
    
