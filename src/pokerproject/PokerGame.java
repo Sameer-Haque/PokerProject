@@ -10,12 +10,46 @@ public class PokerGame extends Game {
     private boolean folded;
     private static player1 player =10;
     private static player2 player = 10;
+    Private HAND_VALUE value;
+    
+
+    public enum HAND_VALUE {
+        HIGH, ONE_PAIR, TWO_PAIR, THREE_OF_KIND, STRAIGHT, FLUSH,
+        FULL_HOUSE, FOUR_OF_KIND, STRAIGHT_FLUSH, ROYAL_FLUSH;
+    }
+
 
     public PokerGame(String string) {
         super(string);
     }
     
-    
+    ArrayList<Card> Cards = new ArrayList<Card>();
+
+    public Hand(ArrayList<Card> cards) {
+        this.value = null;
+        this.Cards = cards;
+    }
+
+    public Hand(ArrayList<Card> cards, HAND_VALUE value) {
+        this.value = value;
+        this.Cards = cards;
+    }
+
+    public void setValue(HAND_VALUE value) {
+        this.value = value;
+    }
+
+    public HAND_VALUE getValue() {
+        return value;
+    }
+
+    public ArrayList<Card> getCards() {
+        return Cards;
+    }
+
+    public void setCards(ArrayList<Card> cards) {
+        this.Cards = cards;
+    }
     
     public void dealPlayerCards(){
         for(int i = 0; i<deck.size(); i+=2){
