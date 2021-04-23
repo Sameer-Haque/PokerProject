@@ -2,6 +2,7 @@
  * SYST 17796 Project Base code.
  * Students can modify and extend to implement their game.
  * Add your name as an author and the date!
+ * Date: 4/22/21
  */
 package pokerproject;
 
@@ -10,6 +11,7 @@ package pokerproject;
  * enough to be instantiated for any Card game. Students wishing to add to the
  * code should remember to add themselves as a modifier.
  *
+ * Date: 4/22/21
  * @author Sameer Haque
  * @author dancye
  * @author Phuong 
@@ -61,6 +63,7 @@ public class Card implements Comparable{
         return getRank() + " of " + getSuit();
     }
     
+    @Override
     public int compareTo(Object o) {
        Card c = (Card)o;
        return this.rank.value - c.rank.value;

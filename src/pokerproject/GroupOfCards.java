@@ -2,6 +2,7 @@
  * SYST 17796 Project Base code.
  * Students can modify and extend to implement their game.
  * Add your name as an author and the date!
+ * Date: 4/22/21
  */
 package pokerproject;
 
@@ -12,6 +13,7 @@ import java.util.Collections;
  * A concrete class that represents any grouping of cards for a Game. HINT, you might want to subclass this more than
  * once. The group of cards has a maximum size attribute which is flexible for reuse.
  *
+ * Date: 4/22/21
  * @author Sameer Haque
  * @author dancye
  * @author Paul Bonenfant Jan 2020
@@ -19,7 +21,7 @@ import java.util.Collections;
 public class GroupOfCards {
 
     //The group of cards, stored in an ArrayList
-    private ArrayList<Card> cards;
+    private ArrayList<Card> cards = new ArrayList<Card>();
     private int size;//the size of the grouping
 
     public GroupOfCards(int size) {

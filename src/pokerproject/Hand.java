@@ -1,5 +1,12 @@
 package pokerproject;
 
+/**
+ * Hand
+ * @author Sameer
+ * Date: 4/22/21
+ * makes a hand class that has a value
+ */
+
 import java.util.ArrayList;
 import java.util.Collections;
 import static pokerproject.Hand.HAND_VALUE.*;
@@ -9,8 +16,17 @@ public class Hand {
     private HAND_VALUE value;
 
     public enum HAND_VALUE {
-        HIGH, ONE_PAIR, TWO_PAIR, THREE_OF_KIND, STRAIGHT, FLUSH,
-        FULL_HOUSE, FOUR_OF_KIND, STRAIGHT_FLUSH, ROYAL_FLUSH;
+        
+        HIGH(1), ONE_PAIR(2), TWO_PAIR(3), THREE_OF_KIND(4), STRAIGHT(5),
+        FLUSH(6),FULL_HOUSE(7), FOUR_OF_KIND(8), STRAIGHT_FLUSH(9), ROYAL_FLUSH(10);
+        private int compareNum;
+        
+        private HAND_VALUE(int compareNum) {
+            this.compareNum = compareNum;
+        }
+        public int getCompareNum() {
+            return compareNum;
+        }
     }
 
     ArrayList<Card> Cards = new ArrayList<Card>();
@@ -40,8 +56,9 @@ public class Hand {
     public void setCards(ArrayList<Card> cards) {
         this.Cards = cards;
     }
-
-    public HAND_VALUE findBestHand() {
+    
+    
+    public HAND_VALUE findBestHandValue() {
 
         if (isRoyalFlush()) {
             return ROYAL_FLUSH;

@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * singleton pot
+ * @author Sameer
+ * Date: 4/22/21
+ * makes a single Pot object to store money
  */
 package pokerproject;
 

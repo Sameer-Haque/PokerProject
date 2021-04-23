@@ -1,138 +1,107 @@
 package pokerproject;
 
+/**
+ * play the Poker Game
+ * @author Sameer
+ * Date: 4/22/21
+ * makes a pokergame that you can play
+ */
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PokerGame extends Game {
-    
-    private String name;
-    private double money;
-    private Hand hand;
-    private boolean folded;
-    private static player1 player =10;
-    private static player2 player = 10;
-    Private HAND_VALUE value;
-    
-
-    public enum HAND_VALUE {
-        HIGH, ONE_PAIR, TWO_PAIR, THREE_OF_KIND, STRAIGHT, FLUSH,
-        FULL_HOUSE, FOUR_OF_KIND, STRAIGHT_FLUSH, ROYAL_FLUSH;
-    }
-
 
     public PokerGame(String string) {
         super(string);
     }
     
-    ArrayList<Card> Cards = new ArrayList<Card>();
-
-    public Hand(ArrayList<Card> cards) {
-        this.value = null;
-        this.Cards = cards;
+    public static void main(String[] args) {
+        PokerGame game = new PokerGame("Texus Hold'em");
+        game.play();
     }
-
-    public Hand(ArrayList<Card> cards, HAND_VALUE value) {
-        this.value = value;
-        this.Cards = cards;
-    }
-
-    public void setValue(HAND_VALUE value) {
-        this.value = value;
-    }
-
-    public HAND_VALUE getValue() {
-        return value;
-    }
-
-    public ArrayList<Card> getCards() {
-        return Cards;
-    }
-
-    public void setCards(ArrayList<Card> cards) {
-        this.Cards = cards;
-    }
-    
-    public void dealPlayerCards(){
-        for(int i = 0; i<deck.size(); i+=2){
-            player1.add(deck.get(i));
-            player2.add(deck.get(i+1));
-         
+    public void dealBoardCard(ArrayList<PokerPlayer> players,
+            GroupOfCards deck) {
+        Card card = deck.getCards().get(0);
+        System.out.println(card);
+        for (PokerPlayer player : players) {
+            player.getHand().getCards().add(card);
         }
-        
+        deck.getCards().remove(0);
     }
 
-    public void dealBoardCards(ArrayList<Player> players, GroupOfCards deck, int flipedAmount){
-       deck.getCards().get(0)
-        deck.getCards().remove(0)  
-            
-        
-        
-    }
-    
-    public void flipBoardCards(int i){
-        for (int a = 0; a <= i; a++){
-            System.out.println(EARTS, DIAMONDS, SPADES, CLUBS;);// print the cards in dealBoardCard method
-        }
-    }
-    
-    
-    
     @Override
     public void play() {
-       if (!isFolded()) {
-                Scanner sc = new Scanner(System.in);
-                boolean success = false;
-                Pot pot = Pot.getInstance();
-                do {
-                System.out.println("What do you want to do?\n"
-                        + "Bid[B] | Fold[F] | Check[C]");
-                String input = sc.next();
-                try {
-                    if (input.equalsIgnoreCase("B")) {
-                        System.out.println("Enter how much you want to bid");
-                        double amount = Double.parseDouble(sc.next());
-                        if(canBet(amount)) {
-                            bet(amount);
-                            pot.addMoney(amount);
-                            success = true;
-                        }
-                        else
-                            success = false;
-                    }
-                    else if (input.equalsIgnoreCase("F")) {
-                        fold();
-                        success = true;
-                    }
-                    else if (input.equalsIgnoreCase("C")) {
-                        check();
-                        success = true;
-                    }
-                } catch (NumberFormatException ex) {
-                    System.out.println("Error Number not entered.");
+        Pot pot = Pot.getInstance();
+        double buyIn;
+        Scanner sc = new Scanner(System.in);
+        ArrayList<PokerPlayer> players = new ArrayList<PokerPlayer>();
+        GroupOfCards deck = new GroupOfCards(52);
+        deck.fillDeck();
+        deck.shuffle();
+
+        System.out.println("Welcome to group 2's Poker Game");
+        buyIn = getBuyIn();
+        System.out.println("What is Player Ones name");
+        String name = sc.nextLine();
+        players.add(new PokerPlayer(name, buyIn,
+                new Hand(new ArrayList<Card>())));
+        System.out.println("What is Player Twos name");
+        name = sc.nextLine();
+        players.add(new PokerPlayer(name, buyIn,
+                new Hand(new ArrayList<Card>())));
+        while (players.get(0).getMoney() > 0 && players.get(1).getMoney() > 0) {
+            players.get(0).dealPlayerCards(deck);
+            players.get(1).dealPlayerCards(deck);
+            players.get(0).play();
+            players.get(1).play();
+            dealBoardCard(players, deck);
+            dealBoardCard(players, deck);
+            dealBoardCard(players, deck);
+            players.get(0).play();
+            players.get(1).play();
+            dealBoardCard(players, deck);
+            players.get(0).play();
+            players.get(1).play();
+            dealBoardCard(players, deck);
+            if (players.get(0).isFolded()) {
+                players.get(1).displayRoundWinner(pot);
+            } else if (players.get(1).isFolded()) {
+                players.get(0).displayRoundWinner(pot);
+            } else {
+                if (players.get(0).getHand().findBestHandValue().getCompareNum()
+                        > players.get(1).getHand().findBestHandValue().getCompareNum()) {
+                    players.get(0).displayRoundWinner(pot);
                 }
-            } while(!success);
-        
+                else if (players.get(1).getHand().findBestHandValue().getCompareNum()
+                        > players.get(0).getHand().findBestHandValue().getCompareNum()) {
+                    players.get(1).displayRoundWinner(pot);
+                }
+                else {
+                    System.out.println("TIE");
+                    players.get(0).setMoney(players.get(0).getMoney() + (pot.getMoney()/2));
+                    players.get(1).setMoney(players.get(1).getMoney() + (pot.getMoney()/2));
+                }
+                 pot.emptyPot();
+                 players.get(0).getHand().getCards().clear();
+                 players.get(0).getHand().getCards().clear();
+            }
+
         }
+        if (players.get(0).getMoney() > 0) {
+            System.out.println(players.get(0).getName()+" WON THE POKER GAME");
+        }
+        else
+            System.out.println(players.get(1).getName()+" WON THE POKER GAME");
     }
-
-    @Override
-    public void declareWinner() {
-        
-        if (player1.baseHand() > player2.baseHand()) {
-            System.out.println(player1.getName().toUpperCase() + " WINS " +
-                "WITH A TOTAL OF " + player1.baseHand() + " CARDS!");
-        }
-        else if (player2.baseHand() > player1.baseHand()) {
-            System.out.println(player2.getName().toUpperCase() + " WINS " +
-                "WITH A TOTAL OF " + player2.baseHand() + " CARDS!");
-        }
-        else {
-            System.out.println("THE GAME IS TIED");
-        }
-
-        System.out.println();
-            
- // display the final score
-    player1.displayScore();
-     player2.displayScore();
+    public static double getBuyIn() {
+        Scanner sc = new Scanner(System.in);
+        double buyIn;
+        do {
+            System.out.println("How much money would you like to play with(buy-in)"
+                    + "\nMin: 10.0$\tMax: 100.0$");
+            buyIn = sc.nextDouble();
+        } while (buyIn >= 10.0 && 100.0 <= buyIn);
+        return buyIn;
     }
 }
